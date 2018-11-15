@@ -1,0 +1,112 @@
+var module = function(){
+return{
+
+//Проверка на undefined
+isUndefined: function (value){
+    if(value === undefined){
+        document.write("true");
+        return true;
+    }else{document.write("false")
+        return false}
+},
+
+//Проверка на null
+isNull: function (value){
+    if(value === null){
+        document.write("true");
+        return true;
+    }else{document.write("false")
+        return false}
+},
+
+//Проверка на NaN
+isNan: function (value) {
+        if(value === NaN){
+        document.write("true");
+        return true;
+    }else{document.write("false")
+        return false}
+},
+
+//Проверка, что объект пустой (нет своих свойств)
+isEmptyObj: function (obj){
+    for(i in obj){
+        if(obj.hasOwnProperty(i)){
+            document.write("Not Empty")
+            return false;
+        }else{
+            document.write("Empty");
+            return true;
+        } 
+    }
+},
+
+//Функция преобразования значений всех свойств объекта (аналог map из массива, только для объекта, возвращает новый объект)
+map: function (obj1, value){
+    obj2 = {};
+    for(key in obj1){
+        obj2[key] = obj1[key];
+        obj2[key] = obj2[key] + value;
+    }
+    document.write(obj2);
+    return obj2;
+},
+
+//Функция которая возвращает случайное целое число из переданного в функцию диапазона.
+rand: function (min, max){
+    rand = min + Math.random() * (max + 1 - min);
+    rand = Math.floor(rand);
+    return rand;
+},
+
+//Функция глубокого сравнения двух объектов.
+deepEqual: function (a, b) {
+    if (a === b) 
+    return true;
+
+    if (a == null || typeof(a) != "object" ||
+        b == null || typeof(b) != "object")
+    return false;
+
+    propertiesInA = 0, propertiesInB = 0;
+    for (var property in a) 
+        propertiesInA += 1;
+
+    for (var property in b)
+        propertiesInB += 1;
+
+    if (!(property in a) || !deepEqual(a[property], b[property]))
+    return false; 
+
+    return propertiesInA == propertiesInB;
+},
+
+//Функция удаления всех свойств из объекта, для которых предикат (вызываемая для каждого поля функция) возвращает false (функция возвращает новый объект).
+deleteProp: function (obj, prop){
+    newObj = {};
+    for(key in obj) { 
+        if(obj[key]===prop){
+        newObj[key] = obj[key];
+        }
+        else delete obj[key];
+     }
+     document.write(newObj);
+     return newObj;
+}
+
+}
+}();
+
+var a;
+var b = {value: "element"};
+var c = "jkkj";
+var d = {dscc: 12134};
+
+document.write(module.isUndefined(a));
+document.write(module.isNull(a));
+document.write(module.isNan(a));
+document.write(module.isEmptyObj(b));
+document.write(module.map(b, c));
+document.write(module.rand8(1, 100));
+document.write(module.deepEqual(b, d));
+document.write(module.deleteProp(b, "element"));
